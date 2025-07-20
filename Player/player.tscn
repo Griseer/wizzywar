@@ -1,0 +1,55 @@
+[gd_scene load_steps=9 format=3 uid="uid://dbp7puk82n2h2"]
+
+[ext_resource type="Script" uid="uid://de0a6ixm8l4n1" path="res://Player/Input/input.gd" id="1_4ntmi"]
+[ext_resource type="PackedScene" uid="uid://bi340pe137y0t" path="res://Player/Model/model.tscn" id="1_btcbx"]
+[ext_resource type="Script" uid="uid://dsuv5xh13efyw" path="res://Player/player.gd" id="1_gwnis"]
+[ext_resource type="Script" uid="uid://4crvyx71w63p" path="res://Player/camera.gd" id="1_l8h54"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_kqu6x"]
+radius = 0.2
+height = 1.8
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gwnis"]
+albedo_color = Color(1, 0.419608, 0, 1)
+
+[sub_resource type="PrismMesh" id="PrismMesh_k53q1"]
+size = Vector3(1, 1, 0.1)
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_kqu6x"]
+radius = 0.2
+height = 1.8
+
+[node name="Player" type="CharacterBody3D"]
+script = ExtResource("1_gwnis")
+
+[node name="Visual" type="Node3D" parent="."]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Visual"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0)
+mesh = SubResource("CapsuleMesh_kqu6x")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Visual/MeshInstance3D"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0.852928, 0.143316)
+material_override = SubResource("StandardMaterial3D_gwnis")
+mesh = SubResource("PrismMesh_k53q1")
+
+[node name="Model" parent="." instance=ExtResource("1_btcbx")]
+
+[node name="Input" type="Node" parent="."]
+script = ExtResource("1_4ntmi")
+
+[node name="Collider" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0)
+shape = SubResource("CapsuleShape3D_kqu6x")
+
+[node name="CameraMount" type="Node3D" parent="." node_paths=PackedStringArray("player", "player_camera")]
+script = ExtResource("1_l8h54")
+player = NodePath("..")
+player_camera = NodePath("PivotCamera/PlayerCamera")
+
+[node name="PivotCamera" type="Node3D" parent="CameraMount"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.51657, 0)
+
+[node name="PlayerCamera" type="Camera3D" parent="CameraMount/PivotCamera"]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0.536909, -4)
+fov = 60.0

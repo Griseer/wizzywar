@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://bk6ku7l8m0tdy"]
+
+[ext_resource type="PackedScene" uid="uid://bc4mt034fen6p" path="res://Stage/test.tscn" id="1_7pw87"]
+
+[node name="Wizzy" type="Node"]
+
+[node name="Test" parent="." instance=ExtResource("1_7pw87")]

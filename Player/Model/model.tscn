@@ -1,0 +1,82 @@
+[gd_scene load_steps=12 format=3 uid="uid://bi340pe137y0t"]
+
+[ext_resource type="Script" uid="uid://gygekq2yrq3y" path="res://Player/Model/model.gd" id="1_d5y47"]
+[ext_resource type="PackedScene" uid="uid://ctb5hyg3euove" path="res://Player/Move/states.tscn" id="2_7657f"]
+[ext_resource type="Script" uid="uid://3n1yuymwchbj" path="res://Player/Model/area_awareness.gd" id="2_i8jg2"]
+[ext_resource type="Script" uid="uid://ngti0fqtqaxy" path="res://Player/Move/idle.gd" id="2_n3fwn"]
+[ext_resource type="Script" uid="uid://oo1h06w7vo6a" path="res://Player/Model/resources.gd" id="2_t8pqi"]
+[ext_resource type="Script" uid="uid://dgld4w50n2f0h" path="res://Player/Move/walk.gd" id="3_7657f"]
+[ext_resource type="Script" uid="uid://c2qr7tbg58xri" path="res://Player/Model/down_cast.gd" id="3_hcfwb"]
+[ext_resource type="Script" uid="uid://c6qf57thi8p1k" path="res://Player/Model/moves_data.gd" id="4_pnd6h"]
+[ext_resource type="Script" uid="uid://cd2if7iwxn85f" path="res://Player/Move/run.gd" id="4_t8pqi"]
+[ext_resource type="Script" uid="uid://qyj20b4kddmq" path="res://Player/Move/midair.gd" id="9_hcfwb"]
+[ext_resource type="Script" uid="uid://fup18himog56" path="res://Player/Move/landing_run.gd" id="11_dg5vt"]
+
+[node name="Model" type="Node3D"]
+script = ExtResource("1_d5y47")
+
+[node name="AreaAwareness" type="Node" parent="."]
+script = ExtResource("2_i8jg2")
+
+[node name="Downcast" type="RayCast3D" parent="AreaAwareness" node_paths=PackedStringArray("root_attachment")]
+target_position = Vector3(0, -100, 0)
+script = ExtResource("3_hcfwb")
+root_attachment = NodePath("../../Root")
+
+[node name="CSGSphere3D" type="CSGSphere3D" parent="AreaAwareness/Downcast"]
+visible = false
+radius = 0.2
+
+[node name="CSGSphere3D2" type="CSGSphere3D" parent="AreaAwareness/Downcast"]
+visible = false
+
+[node name="Root" type="BoneAttachment3D" parent="."]
+use_external_skeleton = true
+external_skeleton = NodePath("../GeneralSkeleton")
+
+[node name="GeneralSkeleton" type="Skeleton3D" parent="."]
+unique_name_in_owner = true
+
+[node name="Resources" type="Node" parent="."]
+script = ExtResource("2_t8pqi")
+
+[node name="States" parent="." node_paths=PackedStringArray("resources", "area_awareness", "moves_data_repo") instance=ExtResource("2_7657f")]
+resources = NodePath("../Resources")
+area_awareness = NodePath("../AreaAwareness")
+moves_data_repo = NodePath("MovesData")
+
+[node name="MovesData" type="Node" parent="States"]
+script = ExtResource("4_pnd6h")
+
+[node name="Idle" type="Node" parent="States"]
+script = ExtResource("2_n3fwn")
+animation = "idle_longsword"
+move_name = "idle"
+priority = 1
+tracking_angular_speed = 0.0
+
+[node name="Walk" type="Node" parent="States"]
+script = ExtResource("3_7657f")
+animation = "walk"
+move_name = "walk"
+priority = 2
+
+[node name="Run" type="Node" parent="States"]
+script = ExtResource("4_t8pqi")
+animation = "run"
+move_name = "run"
+priority = 3
+tracking_angular_speed = 15.0
+
+[node name="Midair" type="Node" parent="States"]
+script = ExtResource("9_hcfwb")
+animation = "midair"
+move_name = "midair"
+priority = 10
+backend_animation = "10"
+
+[node name="LandingRun" type="Node" parent="States"]
+script = ExtResource("11_dg5vt")
+animation = "landing_run"
+move_name = "landing_run"
+priority = 10
