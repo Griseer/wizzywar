@@ -1,0 +1,73 @@
+[gd_scene load_steps=10 format=3 uid="uid://bbeiydwv28oa3"]
+
+[ext_resource type="Script" uid="uid://bg6ux0hmb5bnw" path="res://Player/cast/cast.gd" id="1_1j3jh"]
+[ext_resource type="Texture2D" uid="uid://7n20oww4d4im" path="res://Assests/cast/red_star_color.png" id="1_mueqb"]
+[ext_resource type="Texture2D" uid="uid://cbpdosac6sv08" path="res://Assests/cast/water.jpg" id="2_i1mg4"]
+[ext_resource type="Texture2D" uid="uid://dhw2whjvmgctp" path="res://Assests/cast/rock.jpg" id="3_1j3jh"]
+[ext_resource type="Texture2D" uid="uid://cmwb8t2tk1yi7" path="res://Assests/cast/fire.jpg" id="4_suyfh"]
+[ext_resource type="Texture2D" uid="uid://df3qh7mwevkya" path="res://Assests/cast/ice.jpg" id="5_3bqdl"]
+[ext_resource type="Texture2D" uid="uid://dripglmwtsp3b" path="res://Assests/cast/ray.jpg" id="6_jlsnt"]
+[ext_resource type="Texture2D" uid="uid://ss8c2ykvejxi" path="res://Assests/cast/dead.jpg" id="7_w5vri"]
+[ext_resource type="Texture2D" uid="uid://bua3fqth03xr8" path="res://Assests/cast/red_star_center.png" id="8_i1mg4"]
+
+[node name="Cast" type="CanvasLayer" node_paths=PackedStringArray("cast_container", "cast_point", "cast_pointer", "top", "top_left", "top_right", "buttom_left", "buttom_right", "buttom", "center")]
+script = ExtResource("1_1j3jh")
+cast_container = NodePath("CenterScreen/ShowCase")
+cast_point = NodePath("CenterScreen/ShowCase/ShowPointStart")
+cast_pointer = NodePath("CenterScreen/Star/pointer")
+top = NodePath("CenterScreen/Star/Top")
+top_left = NodePath("CenterScreen/Star/TopLeft")
+top_right = NodePath("CenterScreen/Star/TopRight")
+buttom_left = NodePath("CenterScreen/Star/ButtomLeft")
+buttom_right = NodePath("CenterScreen/Star/ButtomRight")
+buttom = NodePath("CenterScreen/Star/Buttom")
+center = NodePath("CenterScreen/Star")
+
+[node name="CenterScreen" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Star" type="Sprite2D" parent="CenterScreen"]
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("1_mueqb")
+
+[node name="Top" type="Sprite2D" parent="CenterScreen/Star"]
+position = Vector2(0, -286)
+texture = ExtResource("2_i1mg4")
+
+[node name="TopLeft" type="Sprite2D" parent="CenterScreen/Star"]
+position = Vector2(-254, -146)
+texture = ExtResource("3_1j3jh")
+
+[node name="TopRight" type="Sprite2D" parent="CenterScreen/Star"]
+position = Vector2(259, -143)
+texture = ExtResource("4_suyfh")
+
+[node name="ButtomLeft" type="Sprite2D" parent="CenterScreen/Star"]
+position = Vector2(-246, 143)
+texture = ExtResource("5_3bqdl")
+
+[node name="ButtomRight" type="Sprite2D" parent="CenterScreen/Star"]
+position = Vector2(249, 138)
+texture = ExtResource("6_jlsnt")
+
+[node name="Buttom" type="Sprite2D" parent="CenterScreen/Star"]
+position = Vector2(0, 297)
+texture = ExtResource("7_w5vri")
+
+[node name="pointer" type="Sprite2D" parent="CenterScreen/Star"]
+texture = ExtResource("8_i1mg4")
+
+[node name="ShowCase" type="Node2D" parent="CenterScreen"]
+position = Vector2(-527, 294)
+scale = Vector2(0.5, 0.5)
+
+[node name="ShowPointStart" type="Node2D" parent="CenterScreen/ShowCase"]
+top_level = true
+position = Vector2(51, 618)

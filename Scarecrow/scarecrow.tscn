@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://ydsqutb3meg0"]
+
+[ext_resource type="PackedScene" uid="uid://djhhewqfyl0mg" path="res://Assests/blend/scarecrow.blend" id="1_hqi6l"]
+
+[node name="scarecrow" type="Node3D"]
+
+[node name="scarecrow" parent="." instance=ExtResource("1_hqi6l")]

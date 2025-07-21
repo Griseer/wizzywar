@@ -19,20 +19,20 @@ func _input(event):
 	#if event.is_action_released("mouse_mode_switch"):
 		#switch_mouse()
 	
-	if event is InputEventMouseMotion and mouse_is_captured:
+	if event is InputEventMouseMotion and mouse_is_captured and !Input.is_action_pressed("cast"):
 		var d_hor = event.relative.x
 		var d_ver = event.relative.y
 		rotate_y(- d_hor / 1000)
-		
-		
-
-		
-		pivot_camera.rotate_x(-d_ver / 1000 )
-		
-		if pivot_camera.rotation_degrees.x > 60:
-			pivot_camera.rotation_degrees.x= 59
-		if pivot_camera.rotation_degrees.x < -40:
-			pivot_camera.rotation_degrees.x= -39
+		#
+		#
+#
+		#
+		#pivot_camera.rotate_x(-d_ver / 1000 )
+		#
+		#if pivot_camera.rotation_degrees.x > 60:
+			#pivot_camera.rotation_degrees.x= 59
+		#if pivot_camera.rotation_degrees.x < -40:
+			#pivot_camera.rotation_degrees.x= -39
 
 
 
